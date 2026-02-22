@@ -1,0 +1,15 @@
+image:
+  repository: ghcr.io/krbck/postgres
+  tag: "16"
+
+postgres:
+  db: appdb
+  user: appuser
+  password: apppass
+
+service:
+  port: 5432
+
+storage:
+  size: 2Gi
+  storageClassName: ""   # k3s ise boş bırak
