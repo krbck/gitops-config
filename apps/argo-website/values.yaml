@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/ORG/v1-website
+  repository: ghcr.io/krbck/v1-website
   tag: "init"
 
 replicaCount: 2
