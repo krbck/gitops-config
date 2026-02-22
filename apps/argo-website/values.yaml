@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/krbck/v1-website
-  tag: "init"
+  tag: "b0ea642417a5dabcc67df2a6f4928a3196fb251f"
 
 replicaCount: 2
 
