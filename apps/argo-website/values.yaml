@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/ORG/v1-website
-  tag: "423dc4a8cbbd6ed6ca3b9c51eb7da0fd36c7e2f5"
+  tag: "dcaecf1f09d3530d24dce5c1aa0e1e95b03d55f8"
 
 replicaCount: 2
 
