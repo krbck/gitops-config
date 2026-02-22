@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/ORG/v1-website
-  tag: "init"
+  tag: "6c77bf1a008a2725a398191c8a788de8ba227364"
 
 replicaCount: 2
 
