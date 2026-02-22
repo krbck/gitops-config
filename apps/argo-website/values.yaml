@@ -4,3 +4,10 @@ image:
 
 replicaCount: 2
 
+service:
+  port: 80
+
+virtualService:
+  enabled: true
+  host: website.krbck.site
+  gateway: krbck-gateway
