@@ -10,4 +10,4 @@ service:
 virtualService:
   enabled: true
   host: website.krbck.site
-  gateway: krbck-gateway
+  gateway: nginx-gateway
