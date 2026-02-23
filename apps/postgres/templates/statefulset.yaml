@@ -19,6 +19,9 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: {{ .Values.service.port }}
+          env:
+            - name: PGDATA
+              value: "{{ .Values.env.PGDATA }}"
           envFrom:
             - secretRef:
                 name: {{ .Release.Name }}-secret

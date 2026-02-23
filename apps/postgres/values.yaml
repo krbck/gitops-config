@@ -12,3 +12,6 @@ service:
 storage:
   size: 2Gi
   storageClassName: "longhorn"   # k3s ise boş bırak
+
+env:
+  PGDATA: /var/lib/postgresql/data/pgdata
