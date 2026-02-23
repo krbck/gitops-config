@@ -11,4 +11,4 @@ service:
 
 storage:
   size: 2Gi
-  storageClassName: ""   # k3s ise boş bırak
+  storageClassName: "longhorn"   # k3s ise boş bırak
