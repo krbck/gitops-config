@@ -42,3 +42,14 @@ readinessProbe:
   initialDelaySeconds: 5
   periodSeconds: 5
 
+serviceAccount:
+  enabled: false
+
+ingress:
+  enabled: false
+
+httpRoute:
+  enabled: false
+
+autoscaling:
+  enabled: false
