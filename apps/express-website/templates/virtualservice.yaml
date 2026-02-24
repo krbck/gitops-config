@@ -12,7 +12,7 @@ spec:
     - match:
         - uri:
             prefix: {{ .Values.virtualService.prefix }}
-    - route:
+      route:
         - destination:
             host: {{ .Release.Name }}
             port:
