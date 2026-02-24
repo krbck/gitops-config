@@ -42,3 +42,5 @@ readinessProbe:
   initialDelaySeconds: 5
   periodSeconds: 5
 
+ingress:
+ enabled: true
