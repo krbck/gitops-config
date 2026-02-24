@@ -29,6 +29,9 @@ secretEnv:
   DB_PASSWORD:
     secretName: postgres-secret
     secretKey: POSTGRES_PASSWORD
+  DB_NAME:
+    secretName: postgres-secret
+    secretKey: POSTGRES_DB
 
 livenessProbe:
   enabled: false
