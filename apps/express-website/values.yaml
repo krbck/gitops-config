@@ -31,13 +31,13 @@ secretEnv:
     secretKey: POSTGRES_PASSWORD
 
 livenessProbe:
-  enabled: true
+  enabled: false
   path: /health
   initialDelaySeconds: 10
   periodSeconds: 10
 
 readinessProbe:
-  enabled: true
+  enabled: false
   path: /health
   initialDelaySeconds: 5
   periodSeconds: 5
