@@ -53,6 +53,9 @@ httpRoute:
 
 autoscaling:
   enabled: false
-  
-ingress:
- enabled: true
+
+virtualService:
+  enabled: true
+  host: website.krbck.site
+  gateway: default/nginx-gateway
+  prefix: /
