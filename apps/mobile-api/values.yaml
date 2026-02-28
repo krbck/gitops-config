@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/krbck/express-website
-  tag: "20260224.14"
+  tag: "20260228.2"
   pullPolicy: IfNotPresent
 
 service:
