@@ -1,0 +1,13 @@
+image:
+  repository: ghcr.io/krbck/portfolio
+  tag: "20260601-1"
+
+replicaCount: 2
+
+service:
+  port: 80
+
+virtualService:
+  enabled: true
+  host: portfolio.krbck.site
+  gateway: default/nginx-gateway
