@@ -1,14 +1,14 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/krbck/express-website
+  repository: ghcr.io/krbck/mobile-api
   tag: "20260224.14"
   pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
   port: 80
-  targetPort: 3000
+  targetPort: 80
 
 resources:
   requests:
@@ -18,20 +18,6 @@ resources:
     cpu: 500m
     memory: 256Mi
 
-env:
-  DB_HOST: postgres.production.svc.cluster.local
-  DB_NAME: postgres
-
-secretEnv:
-  DB_USER:
-    secretName: postgres-secret
-    secretKey: POSTGRES_USER
-  DB_PASSWORD:
-    secretName: postgres-secret
-    secretKey: POSTGRES_PASSWORD
-  DB_NAME:
-    secretName: postgres-secret
-    secretKey: POSTGRES_DB
 
 livenessProbe:
   enabled: false
@@ -53,6 +39,6 @@ autoscaling:
 
 virtualService:
   enabled: true
-  host: website.krbck.site
+  host: api.krbck.site
   gateway: default/nginx-gateway
   prefix: /api
