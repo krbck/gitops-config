@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/krbck/portfolio
-  tag: "20260228.1"
+  tag: "20260301.3"
 
 replicaCount: 2
 
