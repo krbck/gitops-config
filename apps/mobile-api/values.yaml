@@ -18,6 +18,9 @@ resources:
     cpu: 500m
     memory: 256Mi
 
+env:
+  APP_VERSION: "2.0.0"
+
 
 livenessProbe:
   enabled: false
