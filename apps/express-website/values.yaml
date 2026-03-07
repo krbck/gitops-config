@@ -21,6 +21,7 @@ resources:
 env:
   DB_HOST: postgres.production.svc.cluster.local
   DB_NAME: postgres
+  REDIS_HOST: redis-0.redis.production.svc.cluster.local
 
 secretEnv:
   DB_USER:
