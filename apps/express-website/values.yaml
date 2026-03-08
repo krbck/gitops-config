@@ -34,18 +34,6 @@ secretEnv:
     secretName: postgres-secret
     secretKey: POSTGRES_DB
 
-livenessProbe:
-  enabled: false
-  path: /health
-  initialDelaySeconds: 10
-  periodSeconds: 10
-
-readinessProbe:
-  enabled: false
-  path: /health
-  initialDelaySeconds: 5
-  periodSeconds: 5
-
 serviceAccount:
   enabled: false
 
@@ -83,7 +71,7 @@ probes:
   startup:
     enabled: true  # Enable if your app is slow to start (>30s)
     httpGet:
-      path: /
+      path: /health
       port: 3000
     initialDelaySeconds: 10
     periodSeconds: 5
