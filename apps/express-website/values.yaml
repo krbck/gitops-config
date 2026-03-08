@@ -81,7 +81,7 @@ probes:
     failureThreshold: 3
   
   startup:
-    enabled: false  # Enable if your app is slow to start (>30s)
+    enabled: true  # Enable if your app is slow to start (>30s)
     httpGet:
       path: /
       port: 3000
