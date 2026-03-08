@@ -10,6 +10,10 @@ service:
   port: 80
   targetPort: 3000
 
+podAnnotations:
+  sidecar.istio.io/rewriteAppHTTPProbers: "true"
+  traffic.sidecar.istio.io/includeInboundPorts: "3000"
+  
 resources:
   requests:
     cpu: 100m
@@ -33,6 +37,18 @@ secretEnv:
   DB_NAME:
     secretName: postgres-secret
     secretKey: POSTGRES_DB
+
+livenessProbe:
+  enabled: false
+  path: /health
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  enabled: false
+  path: /health
+  initialDelaySeconds: 5
+  periodSeconds: 5
 
 serviceAccount:
   enabled: false
