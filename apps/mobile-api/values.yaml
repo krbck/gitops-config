@@ -51,7 +51,7 @@ probes:
     enabled: true
     httpGet:
       path: /
-      port: 3000
+      port: 3000 # Change it to port which app is using
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
@@ -61,7 +61,7 @@ probes:
     enabled: true
     httpGet:
       path: /
-      port: 3000
+      port: 3000 # Change it to port which app is using
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 3
@@ -71,7 +71,7 @@ probes:
     enabled: false  # Enable if your app is slow to start (>30s)
     httpGet:
       path: /
-      port: 3000
+      port: 3000 # Change it to port which app is using
     initialDelaySeconds: 10
     periodSeconds: 5
     failureThreshold: 30
