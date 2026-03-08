@@ -16,7 +16,7 @@ probes:
   liveness:
     enabled: true
     httpGet:
-      path: /health
+      path: /
       port: 80
     initialDelaySeconds: 30
     periodSeconds: 10
@@ -26,9 +26,9 @@ probes:
   readiness:
     enabled: true
     httpGet:
-      path: /health
+      path: /
       port: 80
-    initialDelaySeconds: 5
+    initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 3
     failureThreshold: 3
@@ -36,9 +36,9 @@ probes:
   startup:
     enabled: false  # Enable if your app is slow to start (>30s)
     httpGet:
-      path: /health
+      path: /
       port: 80
-    initialDelaySeconds: 5
+    initialDelaySeconds: 10
     periodSeconds: 5
     failureThreshold: 30
 
