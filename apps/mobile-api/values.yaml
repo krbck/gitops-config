@@ -50,7 +50,7 @@ probes:
   liveness:
     enabled: true
     httpGet:
-      path: /
+      path: /health
       port: 3000 # Change it to port which app is using
     initialDelaySeconds: 30
     periodSeconds: 10
@@ -60,7 +60,7 @@ probes:
   readiness:
     enabled: true
     httpGet:
-      path: /
+      path: /health
       port: 3000 # Change it to port which app is using
     initialDelaySeconds: 10
     periodSeconds: 5
