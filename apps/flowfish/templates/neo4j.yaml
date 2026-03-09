@@ -3,9 +3,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: neo4j
+  name: flowfish-neo4j
   labels:
-    app: neo4j
+    app: flowfish-neo4j
     {{- include "flowfish.labels" . | nindent 4 }}
 spec:
   type: ClusterIP
@@ -19,25 +19,25 @@ spec:
       protocol: TCP
       name: bolt
   selector:
-    app: neo4j
+    app: flowfish-neo4j
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: neo4j
+  name: flowfish-neo4j
   labels:
-    app: neo4j
+    app: flowfish-neo4j
     {{- include "flowfish.labels" . | nindent 4 }}
 spec:
-  serviceName: neo4j
+  serviceName: flowfish-neo4j
   replicas: 1
   selector:
     matchLabels:
-      app: neo4j
+      app: flowfish-neo4j
   template:
     metadata:
       labels:
-        app: neo4j
+        app: flowfish-neo4j
     spec:
       containers:
         - name: neo4j
