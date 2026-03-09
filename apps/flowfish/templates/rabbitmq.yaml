@@ -3,13 +3,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: rabbitmq
+  name: flowfish-rabbitmq
   labels:
-    app: rabbitmq
+    app: flowfish-rabbitmq
     {{- include "flowfish.labels" . | nindent 4 }}
 spec:
   selector:
-    app: rabbitmq
+    app: flowfish-rabbitmq
   ports:
     - name: amqp
       port: 5672
@@ -22,20 +22,20 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: rabbitmq
+  name: flowfish-rabbitmq
   labels:
-    app: rabbitmq
+    app: flowfish-rabbitmq
     {{- include "flowfish.labels" . | nindent 4 }}
 spec:
-  serviceName: rabbitmq
+  serviceName: flowfish-rabbitmq
   replicas: 1
   selector:
     matchLabels:
-      app: rabbitmq
+      app: flowfish-rabbitmq
   template:
     metadata:
       labels:
-        app: rabbitmq
+        app: flowfish-rabbitmq
     spec:
       containers:
         - name: rabbitmq
