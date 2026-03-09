@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/krbck/mobile-api
-  tag: "20260308.6"
+  tag: "20260308.7"
   pullPolicy: IfNotPresent
 
 service:
