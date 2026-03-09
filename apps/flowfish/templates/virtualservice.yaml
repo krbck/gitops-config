@@ -1,0 +1,30 @@
+{{- if .Values.virtualService.enabled }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  hosts:
+    - {{ .Values.virtualService.host }}
+  gateways:
+    - {{ .Values.virtualService.gateway }}
+  http:
+    {{- if .Values.virtualService.backendPrefix }}
+    - match:
+        - uri:
+            prefix: {{ .Values.virtualService.backendPrefix }}
+      route:
+        - destination:
+            host: flowfish-backend
+            port:
+              number: {{ .Values.backend.service.port }}
+    {{- end }}
+    - match:
+        - uri:
+            prefix: {{ .Values.virtualService.frontendPrefix }}
+      route:
+        - destination:
+            host: flowfish-frontend
+            port:
+              number: {{ .Values.frontend.service.port }}
+{{- end }}
