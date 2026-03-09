@@ -37,7 +37,7 @@ spec:
             {{- end }}
           env:
             - name: DATABASE_URL
-              value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@{{ .Values.backend.database.postgresHost }}:5432/{{ .Values.backend.database.postgresDB }}"
+              value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@{{ .Values.backend.database.postgresHost }}:5432/{{ .Values.backend.database.postgresDB }}?options=-csearch_path%3Dflowfish,public"
           {{- range $key, $value := .Values.backend.secretEnv }}
             - name: {{ $key }}
               valueFrom:
