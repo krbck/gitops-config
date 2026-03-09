@@ -144,7 +144,7 @@ clusterManager:
     tag: "cluster-manager-latest"
     pullPolicy: Always
 
-  logLevel: "INFO"
+  logLevel: "DEBUG"
 
   resources:
     requests:
