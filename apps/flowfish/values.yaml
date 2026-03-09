@@ -129,6 +129,8 @@ secrets:
     CLICKHOUSE_USER: flowfish
     CLICKHOUSE_PASSWORD: "CHANGE_ME"
     FLOWFISH_ENCRYPTION_KEY: "CHANGE_ME_ENCRYPTION_KEY"
+    RABBITMQ_USER: flowfish
+    RABBITMQ_PASSWORD: "CHANGE_ME"
 
 # =============================================================================
 # Cluster Manager (gRPC microservice)
@@ -190,6 +192,31 @@ analysisOrchestrator:
     requests:
       cpu: 100m
       memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# =============================================================================
+# RabbitMQ
+# =============================================================================
+rabbitmq:
+  enabled: true
+
+  image:
+    repository: rabbitmq
+    tag: "3-management-alpine"
+    pullPolicy: IfNotPresent
+
+  user: flowfish
+
+  persistence:
+    storageClass: local-path
+    size: 2Gi
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
     limits:
       cpu: 500m
       memory: 512Mi
