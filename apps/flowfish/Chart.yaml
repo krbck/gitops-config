@@ -1,6 +1,0 @@
-apiVersion: v2
-name: flowfish
-description: FlowFish - Kubernetes observability platform with backend API and frontend UI
-type: application
-version: 0.1.0
-appVersion: "2.3.0"
