@@ -1,0 +1,83 @@
+{{- if .Values.changeDetectionWorker.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: change-detection-worker
+  labels:
+    app: change-detection-worker
+    component: worker
+    tier: microservices
+spec:
+  replicas: {{ .Values.changeDetectionWorker.replicas }}
+  selector:
+    matchLabels:
+      app: change-detection-worker
+  template:
+    metadata:
+      labels:
+        app: change-detection-worker
+        component: worker
+        tier: microservices
+    spec:
+      serviceAccountName: flowfish
+      containers:
+        - name: change-detection-worker
+          image: "{{ .Values.changeDetectionWorker.image.repository }}:{{ .Values.changeDetectionWorker.image.tag }}"
+          imagePullPolicy: {{ .Values.changeDetectionWorker.image.pullPolicy }}
+          env:
+            - name: SERVICE_NAME
+              value: "change-detection-worker"
+            - name: LOG_LEVEL
+              value: {{ .Values.changeDetectionWorker.logLevel | quote }}
+            - name: RABBITMQ_HOST
+              value: "flowfish-rabbitmq"
+            - name: RABBITMQ_PORT
+              value: "5672"
+            - name: RABBITMQ_USER
+              valueFrom:
+                secretKeyRef:
+                  name: flowfish-secrets
+                  key: rabbitmq-user
+            - name: RABBITMQ_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flowfish-secrets
+                  key: rabbitmq-password
+            - name: CLICKHOUSE_HOST
+              value: "clickhouse"
+            - name: CLICKHOUSE_PORT
+              value: "9000"
+            - name: CLICKHOUSE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: flowfish-secrets
+                  key: clickhouse-user
+            - name: CLICKHOUSE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flowfish-secrets
+                  key: clickhouse-password
+            - name: CLICKHOUSE_DATABASE
+              value: {{ .Values.clickhouse.database | quote }}
+            - name: NEO4J_URI
+              value: "bolt://neo4j:7687"
+            - name: NEO4J_USER
+              value: "neo4j"
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flowfish-secrets
+                  key: neo4j-password
+          resources:
+            {{- toYaml .Values.changeDetectionWorker.resources | nindent 12 }}
+          livenessProbe:
+            exec:
+              command: ["python", "-c", "print('alive')"]
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            exec:
+              command: ["python", "-c", "print('ready')"]
+            initialDelaySeconds: 5
+            periodSeconds: 10
+{{- end }}

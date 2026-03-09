@@ -293,3 +293,69 @@ virtualService:
   gateway: default/nginx-gateway
   backendPrefix: /api
   frontendPrefix: /
+
+# =============================================================================
+# Timeseries Writer (RabbitMQ -> ClickHouse consumer)
+# =============================================================================
+timeseriesWriter:
+  enabled: true
+  replicas: 1
+
+  image:
+    repository: taylanbakircioglu/flowfish
+    tag: "timeseries-writer-latest"
+    pullPolicy: Always
+
+  logLevel: "INFO"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+
+# =============================================================================
+# Graph Writer (RabbitMQ -> Neo4j consumer)
+# =============================================================================
+graphWriter:
+  enabled: true
+  replicas: 1
+
+  image:
+    repository: taylanbakircioglu/flowfish
+    tag: "graph-writer-latest"
+    pullPolicy: Always
+
+  logLevel: "INFO"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# =============================================================================
+# Change Detection Worker (RabbitMQ consumer & analysis)
+# =============================================================================
+changeDetectionWorker:
+  enabled: true
+  replicas: 1
+
+  image:
+    repository: taylanbakircioglu/flowfish
+    tag: "change-detection-worker-latest"
+    pullPolicy: Always
+
+  logLevel: "INFO"
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
