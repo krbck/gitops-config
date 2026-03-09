@@ -70,7 +70,7 @@ spec:
             - name: GADGET_PROTOCOL
               value: "kubectl"
             - name: GADGET_NAMESPACE
-              value: {{ .Values.namespace.name | quote }}
+              value: {{ .Values.gadget.namespace | quote }}
             {{- if .Values.clusterManager.encryptionKey }}
             - name: FLOWFISH_ENCRYPTION_KEY
               valueFrom:
