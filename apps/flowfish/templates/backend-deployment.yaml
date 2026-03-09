@@ -20,6 +20,7 @@ spec:
       labels:
         app: flowfish-backend
     spec:
+      serviceAccountName: flowfish-backend
       containers:
         - name: backend
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"

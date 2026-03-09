@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flowfish-backend
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "flowfish.labels" . | nindent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: flowfish-backend
+  labels:
+    {{- include "flowfish.labels" . | nindent 4 }}
+rules:
+  # Read pods, services, deployments across all namespaces (for gadget detection & monitoring)
+  - apiGroups: [""]
+    resources: ["pods", "services", "namespaces", "nodes", "events"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments", "daemonsets", "replicasets", "statefulsets"]
+    verbs: ["get", "list", "watch"]
+  # Execute commands in pods (for gadget interaction)
+  - apiGroups: [""]
+    resources: ["pods/exec", "pods/log"]
+    verbs: ["get", "create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: flowfish-backend
+  labels:
+    {{- include "flowfish.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: flowfish-backend
+subjects:
+  - kind: ServiceAccount
+    name: flowfish-backend
+    namespace: {{ .Values.namespace.name }}

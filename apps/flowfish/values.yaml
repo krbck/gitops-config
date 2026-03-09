@@ -122,8 +122,8 @@ frontend:
 secrets:
   create: true
   data:
-    POSTGRES_USER: flowfish
-    POSTGRES_PASSWORD: "CHANGE_ME"
+    POSTGRES_USER: appuser
+    POSTGRES_PASSWORD: "CHANGE_ME"  # <-- Set this to your actual appuser password from postgres-secret
     SECRET_KEY: "CHANGE_ME_SUPER_SECRET"
     NEO4J_PASSWORD: "CHANGE_ME"
     CLICKHOUSE_USER: flowfish
