@@ -100,6 +100,10 @@ spec:
               value: "cluster-manager"
             - name: CLUSTER_MANAGER_PORT
               value: "5001"
+            - name: BACKEND_SERVICE_HOST
+              value: "flowfish-backend"
+            - name: BACKEND_SERVICE_PORT
+              value: "8000"
           resources:
             {{- toYaml .Values.analysisOrchestrator.resources | nindent 12 }}
           livenessProbe:
