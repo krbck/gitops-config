@@ -123,11 +123,76 @@ secrets:
   create: true
   data:
     POSTGRES_USER: appuser
-    POSTGRES_PASSWORD: "CHANGE_ME"  # <-- Set this to your actual appuser password from postgres-secret
+    POSTGRES_PASSWORD: "apppass"  # <-- Set this to your actual appuser password from postgres-secret
     SECRET_KEY: "CHANGE_ME_SUPER_SECRET"
     NEO4J_PASSWORD: "CHANGE_ME"
     CLICKHOUSE_USER: flowfish
     CLICKHOUSE_PASSWORD: "CHANGE_ME"
+    FLOWFISH_ENCRYPTION_KEY: "CHANGE_ME_ENCRYPTION_KEY"
+
+# =============================================================================
+# Cluster Manager (gRPC microservice)
+# =============================================================================
+clusterManager:
+  enabled: true
+  encryptionKey: true  # Set to false if FLOWFISH_ENCRYPTION_KEY not needed
+
+  image:
+    repository: taylanbakircioglu/flowfish
+    tag: "cluster-manager-latest"
+    pullPolicy: Always
+
+  logLevel: "INFO"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# =============================================================================
+# Ingestion Service (gRPC microservice)
+# =============================================================================
+ingestionService:
+  enabled: true
+
+  image:
+    repository: taylanbakircioglu/flowfish
+    tag: "ingestion-service-latest"
+    pullPolicy: Always
+
+  logLevel: "INFO"
+
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+
+# =============================================================================
+# Analysis Orchestrator (gRPC microservice)
+# =============================================================================
+analysisOrchestrator:
+  enabled: true
+
+  image:
+    repository: taylanbakircioglu/flowfish
+    tag: "analysis-orchestrator-latest"
+    pullPolicy: Always
+
+  logLevel: "INFO"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
 
 # =============================================================================
 # ClickHouse
