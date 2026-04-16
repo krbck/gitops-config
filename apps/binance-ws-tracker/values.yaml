@@ -24,9 +24,9 @@ env:
   ALERT_COOLDOWN: "60000"
   HEALTH_PORT: "3000"
 
-envFromSecret:
+secretEnv:
   N8N_WEBHOOK_URL:
-    secretName: tracker-secrets
+    secretName: binance-tracker-secret
     secretKey: n8n-url
 
 
