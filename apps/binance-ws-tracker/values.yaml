@@ -19,7 +19,15 @@ resources:
     memory: 256Mi
 
 env:
-  APP_VERSION: "1.5.5"
+  SYMBOL: "solusdt"
+  ALERT_THRESHOLD: "0.5"
+  ALERT_COOLDOWN: "60000"
+  HEALTH_PORT: "3000"
+
+envFromSecret:
+  N8N_WEBHOOK_URL:
+    secretName: tracker-secrets
+    secretKey: n8n-url
 
 
 livenessProbe:
