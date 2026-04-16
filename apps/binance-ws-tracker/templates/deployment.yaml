@@ -15,7 +15,7 @@ spec:
         app: {{ include "express-website.name" . }}
     spec:
       containers:
-        - name: express-website
+        - name: binance-ws-tracker
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

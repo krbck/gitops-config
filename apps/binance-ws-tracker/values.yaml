@@ -41,7 +41,7 @@ autoscaling:
   enabled: false
 
 virtualService:
-  enabled: true
+  enabled: false
   host: api.krbck.site
   gateway: default/nginx-gateway
   prefix: /api
@@ -51,7 +51,7 @@ probes:
     enabled: true
     httpGet:
       path: /health
-      port: 80 # Change it to port which app is using
+      port: 3000 # Change it to port which app is using
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
@@ -61,7 +61,7 @@ probes:
     enabled: true
     httpGet:
       path: /health
-      port: 80 # Change it to port which app is using
+      port: 3000 # Change it to port which app is using
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 3

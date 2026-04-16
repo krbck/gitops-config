@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "express-website.fullname" . }}
+  name: {{ include "binance-ws-tracker.fullname" . }}
   labels:
-    {{- include "express-website.labels" . | nindent 4 }}
+    {{- include "binance-ws-tracker.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
