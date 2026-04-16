@@ -13,13 +13,9 @@ spec:
     metadata:
       labels:
         app: {{ include "binance-ws-tracker.name" . }}
-      {{- if .Values.datadog.enabled }}
-      annotations:
-        admission.datadoghq.com/enabled: "true"
-      {{- else }}
-      annotations:
+        {{- if not .Values.datadog.enabled }}
         admission.datadoghq.com/enabled: "false"
-      {{- end }}
+        {{- end }}
     spec:
       containers:
         - name: binance-ws-tracker
