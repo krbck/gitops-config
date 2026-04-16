@@ -5,6 +5,9 @@ image:
   tag: "20260416.2"
   pullPolicy: IfNotPresent
 
+datadog:
+  enabled: false
+  
 service:
   type: ClusterIP
   port: 80
