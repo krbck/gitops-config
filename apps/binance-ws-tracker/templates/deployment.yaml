@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "express-website.fullname" . }}
+  name: {{ include "binance-ws-tracker.fullname" . }}
   labels:
-    {{- include "express-website.labels" . | nindent 4 }}
+    {{- include "binance-ws-tracker.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "express-website.name" . }}
+      app: {{ include "binance-ws-tracker.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "express-website.name" . }}
+        app: {{ include "binance-ws-tracker.name" . }}
     spec:
       containers:
         - name: binance-ws-tracker
