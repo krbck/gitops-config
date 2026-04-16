@@ -1,0 +1,86 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/krbck/binance-ws-tracker
+  tag: ""
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 3000
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+env:
+  APP_VERSION: "1.5.5"
+
+
+livenessProbe:
+  enabled: false
+  path: /health
+  initialDelaySeconds: 10
+  periodSeconds: 10
+
+readinessProbe:
+  enabled: false
+  path: /health
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+serviceAccount:
+  enabled: false
+
+autoscaling:
+  enabled: false
+
+virtualService:
+  enabled: true
+  host: api.krbck.site
+  gateway: default/nginx-gateway
+  prefix: /api
+
+probes:
+  liveness:
+    enabled: true
+    httpGet:
+      path: /health
+      port: 80 # Change it to port which app is using
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  
+  readiness:
+    enabled: true
+    httpGet:
+      path: /health
+      port: 80 # Change it to port which app is using
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+  
+  startup:
+    enabled: false  # Enable if your app is slow to start (>30s)
+    httpGet:
+      path: /
+      port: 80 # Change it to port which app is using
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    failureThreshold: 30
+
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
