@@ -30,7 +30,7 @@ env:
 secretEnv:
   N8N_WEBHOOK_URL:
     secretName: binance-tracker-secret
-    secretKey: n8n-url
+    secretKey: n8n-webhook-url
 
 
 livenessProbe:
