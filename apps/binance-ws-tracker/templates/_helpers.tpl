@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "express-website.name" -}}
+{{- define "binance-ws-tracker.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "express-website.fullname" -}}
+{{- define "binance-ws-tracker.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "express-website.chart" -}}
+{{- define "binance-ws-tracker.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "express-website.labels" -}}
-helm.sh/chart: {{ include "express-website.chart" . }}
-{{ include "express-website.selectorLabels" . }}
+{{- define "binance-ws-tracker.labels" -}}
+helm.sh/chart: {{ include "binance-ws-tracker.chart" . }}
+{{ include "binance-ws-tracker.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "express-website.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "express-website.name" . }}
+{{- define "binance-ws-tracker.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "binance-ws-tracker.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "express-website.serviceAccountName" -}}
+{{- define "binance-ws-tracker.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "express-website.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "binance-ws-tracker.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
