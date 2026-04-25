@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/krbck/binance-ws-tracker
-  tag: "20260425.6"
+  tag: "20260425.7"
   pullPolicy: IfNotPresent
 
 datadog:
