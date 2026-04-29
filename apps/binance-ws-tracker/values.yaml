@@ -33,13 +33,13 @@ secretEnv:
     secretKey: n8n-webhook-url
   BINANCE_API_KEY:
     secretName: binance-tracker-secret
-    secretKey: binance-api-key
+    secretKey: BINANCE_API_KEY
   BINANCE_API_SECRET:
     secretName: binance-tracker-secret
-    secretKey: binance-api-secret
+    secretKey: BINANCE_API_SECRET
   TELEGRAM_BOT_TOKEN:
     secretName: binance-tracker-secret
-    secretKey: telegram-bot-token
+    secretKey: TELEGRAM_BOT_TOKEN
 
 
 livenessProbe:
