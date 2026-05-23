@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/krbck/v1-website
-  tag: "20260314.15"
+  tag: "20260523.18"
 
 replicaCount: 2
 
