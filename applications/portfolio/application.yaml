@@ -14,7 +14,7 @@ spec:
         - ../applications/portfolio/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: production
   syncPolicy:
     automated:
       prune: true
