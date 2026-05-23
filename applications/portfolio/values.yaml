@@ -23,12 +23,6 @@ probes:
     timeoutSeconds: 5
     failureThreshold: 3
   
-serviceAccount:
-  enabled: false
-
-autoscaling:
-  enabled: false
-  
   readiness:
     enabled: true
     httpGet:
@@ -48,7 +42,11 @@ autoscaling:
     periodSeconds: 5
     failureThreshold: 30
 
+serviceAccount:
+  enabled: false
 
+autoscaling:
+  enabled: false
 resources: {}
 
 nodeSelector: {}
