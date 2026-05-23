@@ -52,7 +52,7 @@ autoscaling:
 
 virtualService:
   enabled: false
-  host: api.krbck.site
+  host: api.kuberunner.com
   gateway: default/nginx-gateway
   prefix: /api
 
