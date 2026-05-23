@@ -7,6 +7,12 @@ replicaCount: 2
 service:
   port: 80
 
+serviceAccount:
+  enabled: false
+
+autoscaling:
+  enabled: false
+
 virtualService:
   enabled: true
   host: website.kuberunner.com

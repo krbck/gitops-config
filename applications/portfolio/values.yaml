@@ -23,6 +23,12 @@ probes:
     timeoutSeconds: 5
     failureThreshold: 3
   
+serviceAccount:
+  enabled: false
+
+autoscaling:
+  enabled: false
+  
   readiness:
     enabled: true
     httpGet:
