@@ -77,11 +77,11 @@ probes:
     periodSeconds: 5
     failureThreshold: 30
 
-podSecurityContext:
-  runAsNonRoot: true
-  runAsUser: 1000
+podSecurityContext: {}
 
 securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
   capabilities:
     drop:
       - ALL

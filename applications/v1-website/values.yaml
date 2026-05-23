@@ -7,7 +7,7 @@ replicaCount: 2
 service:
   type: ClusterIP
   port: 80
-  targetPort: 80
+  targetPort: 8080
 
 serviceAccount:
   enabled: false
@@ -25,7 +25,7 @@ probes:
     enabled: true
     httpGet:
       path: /
-      port: 80
+      port: 8080
     initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
@@ -35,7 +35,7 @@ probes:
     enabled: true
     httpGet:
       path: /
-      port: 80
+      port: 8080
     initialDelaySeconds: 10
     periodSeconds: 5
     timeoutSeconds: 3
@@ -45,7 +45,7 @@ probes:
     enabled: false  # Enable if your app is slow to start (>30s)
     httpGet:
       path: /
-      port: 80
+      port: 8080
     initialDelaySeconds: 10
     periodSeconds: 5
     failureThreshold: 30
@@ -54,11 +54,11 @@ probes:
 podSecurityContext: {}
 
 securityContext:
+  runAsNonRoot: true
+  runAsUser: 101
   capabilities:
     drop:
       - ALL
-    add:
-      - NET_BIND_SERVICE
   allowPrivilegeEscalation: false
 
 resources: {}
