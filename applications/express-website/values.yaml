@@ -77,6 +77,15 @@ probes:
     periodSeconds: 5
     failureThreshold: 30
 
+podSecurityContext:
+  runAsNonRoot: true
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  allowPrivilegeEscalation: false
+
 
 resources: {}
 

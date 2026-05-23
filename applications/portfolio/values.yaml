@@ -49,6 +49,14 @@ serviceAccount:
 
 autoscaling:
   enabled: false
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  allowPrivilegeEscalation: false
+
 resources: {}
 
 nodeSelector: {}

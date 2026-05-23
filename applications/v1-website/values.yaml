@@ -51,6 +51,14 @@ probes:
     failureThreshold: 30
 
 
+podSecurityContext: {}
+
+securityContext:
+  capabilities:
+    drop:
+      - ALL
+  allowPrivilegeEscalation: false
+
 resources: {}
 
 nodeSelector: {}
