@@ -73,3 +73,28 @@ spec:
           
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.podAntiAffinity.enabled }}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - {{ include "base-chart.name" . }}
+                topologyKey: kubernetes.io/hostname
+      {{- else if .Values.affinity }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

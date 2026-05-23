@@ -5,3 +5,12 @@
 podSecurityContext: {}
 
 securityContext: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+podAntiAffinity:
+  enabled: false
