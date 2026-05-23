@@ -1,23 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ include "base-chart.fullname" . }}
+  labels:
+    {{- include "base-chart.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      app: {{ include "base-chart.name" . }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        app: {{ include "base-chart.name" . }}
     spec:
       containers:
-        - name: app
+        - name: {{ include "base-chart.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 80
-            
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+{{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+{{- end }}
+{{- range $key, $value := .Values.secretEnv }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $value.secretName }}
+                  key: {{ $value.secretKey }}
+{{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
           {{- if .Values.probes.liveness.enabled }}
           livenessProbe:
             httpGet:
