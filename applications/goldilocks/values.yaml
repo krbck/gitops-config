@@ -1,0 +1,10 @@
+vpa:
+  # Automatically installs the VPA recommender sub-chart.
+  # If you already have VPA installed in your cluster, set this to false.
+  enabled: true
+
+dashboard:
+  # Expose dashboard if needed, or keep port-forwarding.
+  service:
+    type: NodePort
+    nodePort: 30104
