@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://homarr-labs.github.io/charts/
+    - repoURL: ghcr.io/homarr-labs/charts
       chart: homarr
       targetRevision: 2.4.0
       helm:
