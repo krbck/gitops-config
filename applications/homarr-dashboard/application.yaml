@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: homarr-dashboard
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://homarr-labs.github.io/charts/
+      chart: homarr
+      targetRevision: 2.4.0
+      helm:
+        valueFiles:
+          - $values/applications/homarr-dashboard/values.yaml
+    - repoURL: https://github.com/krbck/gitops-config.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: util
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

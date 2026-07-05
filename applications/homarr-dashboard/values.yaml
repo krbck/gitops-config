@@ -1,0 +1,124 @@
+## Homarr Dashboard - Helm Values
+## Chart: https://homarr-labs.github.io/charts/
+## Docs:  https://homarr.dev/docs/getting-started/installation/kubernetes
+
+# ---------------------------------------------------------------------------
+# Image
+# ---------------------------------------------------------------------------
+image:
+  repository: ghcr.io/homarr-labs/homarr
+  tag: ""          # Leave empty to follow chart's default (appVersion)
+  pullPolicy: IfNotPresent
+
+# ---------------------------------------------------------------------------
+# Replicas
+# ---------------------------------------------------------------------------
+replicaCount: 1
+
+# ---------------------------------------------------------------------------
+# Secret - REQUIRED
+# Generate with: openssl rand -hex 32
+# Store this in a Kubernetes secret and reference it, or set directly.
+# ---------------------------------------------------------------------------
+envFrom:
+  - secretRef:
+      name: homarr-secret
+
+env: {}
+  # AUTH_PROVIDERS: credentials   # or "ldap", "oidc"
+  # TZ: Europe/Istanbul
+
+# ---------------------------------------------------------------------------
+# Service
+# ---------------------------------------------------------------------------
+service:
+  type: ClusterIP
+  port: 7575
+
+# ---------------------------------------------------------------------------
+# Ingress / VirtualService
+# Uncomment the ingress block if you use a standard ingress controller.
+# ---------------------------------------------------------------------------
+virtualService:
+  enabled: true
+  host: website.krbck.site
+  gateway: default/nginx-gateway
+  prefix: /api
+
+# ---------------------------------------------------------------------------
+# Persistence
+# SQLite data + user uploads live under /appdata by default.
+# ---------------------------------------------------------------------------
+persistence:
+  data:
+    enabled: true
+    size: 1Gi
+    storageClass: ""   # Use your cluster's default StorageClass
+    accessMode: ReadWriteOnce
+
+# ---------------------------------------------------------------------------
+# RBAC
+# Enable if you want Homarr to discover Kubernetes services automatically.
+# ---------------------------------------------------------------------------
+rbac:
+  enabled: true
+
+serviceAccount:
+  create: true
+
+# ---------------------------------------------------------------------------
+# Resources
+# ---------------------------------------------------------------------------
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+# ---------------------------------------------------------------------------
+# Security Context
+# ---------------------------------------------------------------------------
+podSecurityContext:
+  fsGroup: 1000
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+# ---------------------------------------------------------------------------
+# Probes
+# ---------------------------------------------------------------------------
+livenessProbe:
+  httpGet:
+    path: /
+    port: 7575
+  initialDelaySeconds: 30
+  periodSeconds: 15
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 7575
+  initialDelaySeconds: 15
+  periodSeconds: 10
+  failureThreshold: 3
+
+# ---------------------------------------------------------------------------
+# Autoscaling (disabled for homelab single-node)
+# ---------------------------------------------------------------------------
+autoscaling:
+  enabled: false
+
+# ---------------------------------------------------------------------------
+# Node scheduling
+# ---------------------------------------------------------------------------
+nodeSelector: {}
+tolerations: []
+affinity: {}
