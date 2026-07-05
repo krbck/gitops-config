@@ -33,8 +33,13 @@ env:
 # Service
 # ---------------------------------------------------------------------------
 service:
-  type: ClusterIP
-  port: 7575
+  type: NodePort
+  ports:
+    app:
+      port: 7575
+      targetPort: http
+      protocol: TCP
+      nodePort: 30107
 
 # ---------------------------------------------------------------------------
 # Ingress / VirtualService
