@@ -54,14 +54,14 @@ persistence:
   homarrDatabase:
     enabled: true
     name: "homarr-database"
-    storageClassName: ""
+    storageClassName: "longhorn"
     accessMode: "ReadWriteOnce"
     size: "1Gi"
     mountPath: "/appdata/db"
   homarrImages:
     enabled: true
     name: "homarr-images"
-    storageClassName: ""
+    storageClassName: "longhorn"
     accessMode: "ReadWriteOnce"
     size: "1Gi"
     mountPath: "/images"
