@@ -20,13 +20,14 @@ replicaCount: 1
 # Generate with: openssl rand -hex 32
 # Store this in a Kubernetes secret and reference it, or set directly.
 # ---------------------------------------------------------------------------
-envFrom:
-  - secretRef:
-      name: homarr-secret
+envSecrets:
+  dbCredentials:
+    existingSecret: "homarr-secret"
+    dbEncryptionKey: "SECRET_ENCRYPTION_KEY"
 
-env: {}
-  # AUTH_PROVIDERS: credentials   # or "ldap", "oidc"
-  # TZ: Europe/Istanbul
+env:
+  AUTH_PROVIDERS: "credentials"
+  TZ: "Europe/Istanbul"
 
 # ---------------------------------------------------------------------------
 # Service
@@ -50,11 +51,20 @@ virtualService:
 # SQLite data + user uploads live under /appdata by default.
 # ---------------------------------------------------------------------------
 persistence:
-  data:
+  homarrDatabase:
     enabled: true
-    size: 1Gi
-    storageClass: ""   # Use your cluster's default StorageClass
-    accessMode: ReadWriteOnce
+    name: "homarr-database"
+    storageClassName: ""
+    accessMode: "ReadWriteOnce"
+    size: "1Gi"
+    mountPath: "/appdata/db"
+  homarrImages:
+    enabled: true
+    name: "homarr-images"
+    storageClassName: ""
+    accessMode: "ReadWriteOnce"
+    size: "1Gi"
+    mountPath: "/images"
 
 # ---------------------------------------------------------------------------
 # RBAC
