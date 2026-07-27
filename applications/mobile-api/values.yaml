@@ -12,11 +12,11 @@ service:
 
 resources:
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 50m
+    memory: 105M
   limits:
-    cpu: 500m
-    memory: 256Mi
+    cpu: 100m
+    memory: 210M
 
 env:
   APP_VERSION: "2.1.1"
@@ -88,8 +88,6 @@ securityContext:
     add:
       - NET_BIND_SERVICE
   allowPrivilegeEscalation: false
-
-resources: {}
 
 nodeSelector: {}
 

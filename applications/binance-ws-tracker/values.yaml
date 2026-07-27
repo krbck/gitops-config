@@ -15,11 +15,11 @@ service:
 
 resources:
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 20m
+    memory: 105Mi
   limits:
-    cpu: 500m
-    memory: 256Mi
+    cpu: 50m
+    memory: 210Mi
 
 env:
   SYMBOL: "solusdt"
@@ -96,8 +96,6 @@ securityContext:
     drop:
       - ALL
   allowPrivilegeEscalation: false
-
-resources: {}
 
 nodeSelector: {}
 
