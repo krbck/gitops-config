@@ -19,7 +19,7 @@ resources:
     memory: 210M
 
 env:
-  APP_VERSION: "2.1.1"
+  APP_VERSION: "2.3.0"
 
 
 livenessProbe:
