@@ -48,7 +48,11 @@ serviceAccount:
   enabled: false
 
 autoscaling:
-  enabled: false
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 90
+  targetMemoryUtilizationPercentage: 90
 
 podSecurityContext: {}
 

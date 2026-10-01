@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: ghcr.io/krbck/binance-ws-tracker
@@ -48,7 +48,11 @@ serviceAccount:
   enabled: false
 
 autoscaling:
-  enabled: false
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 90
+  targetMemoryUtilizationPercentage: 90
 
 virtualService:
   enabled: false
