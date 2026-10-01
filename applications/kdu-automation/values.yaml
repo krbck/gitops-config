@@ -1,0 +1,77 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/krbck/kdu-automation
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+  targetPort: 3000
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
+
+env:
+  PORT: "3000"
+  NODE_ENV: "production"
+  REDIS_HOST: "redis-master.default.svc.cluster.local"
+  REDIS_PORT: "6379"
+
+# We inject secrets to the deployment safely using the base chart's secretEnv feature
+secretEnv:
+  FIREBASE_DATABASE_URL:
+    secretName: kdu-automation-secrets
+    secretKey: FIREBASE_DATABASE_URL
+  FIREBASE_SERVICE_ACCOUNT_JSON:
+    secretName: kdu-automation-secrets
+    secretKey: FIREBASE_SERVICE_ACCOUNT_JSON
+  DEEPSEEK_API_KEY:
+    secretName: kdu-automation-secrets
+    secretKey: DEEPSEEK_API_KEY
+
+virtualService:
+  enabled: true
+  host: kdu-automation.kuberunner.com
+  gateway: default/nginx-gateway
+  prefix: /
+
+probes:
+  liveness:
+    enabled: true
+    httpGet:
+      path: /dashboard
+      port: 3000
+    initialDelaySeconds: 15
+    periodSeconds: 20
+    timeoutSeconds: 5
+    failureThreshold: 3
+  
+  readiness:
+    enabled: true
+    httpGet:
+      path: /dashboard
+      port: 3000
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
+
+autoscaling:
+  enabled: false
+
+podSecurityContext: {}
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+      - ALL
+  allowPrivilegeEscalation: false
