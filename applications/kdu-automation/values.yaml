@@ -21,7 +21,7 @@ resources:
 env:
   PORT: "3000"
   NODE_ENV: "production"
-  REDIS_HOST: "redis-master.default.svc.cluster.local"
+  REDIS_HOST: "redis.production.svc.cluster.local"
   REDIS_PORT: "6379"
 
 # We inject secrets to the deployment safely using the base chart's secretEnv feature
