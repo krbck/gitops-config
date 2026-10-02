@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/krbck/kdu-automation
-  tag: "20261002.4"
+  tag: "20261002.5"
   pullPolicy: IfNotPresent
 
 service:
